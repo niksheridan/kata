@@ -1,7 +1,10 @@
 [project]
 name = "kata"
 version = "0.1.0"
-description = "Add your description here"
+description = "A Python package for managing and running coding katas."
+authors = [
+    { name = "Nik Sheridan", email = "niksheridan@duck.com" },
+]
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
