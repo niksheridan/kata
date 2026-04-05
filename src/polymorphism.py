@@ -21,5 +21,5 @@ class PayPal(PaymentBase):
 if __name__ == "__main__":
     payments = [CreditCard(100), PayPal(200)]
     for payment in payments:
-        # each method is called, with the same interface, but different implementations
+        # demonstrating polymorphism - we can call the same method on different types of payment objects
         payment.process_payment()
