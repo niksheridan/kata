@@ -23,3 +23,4 @@ if __name__ == "__main__":
     for payment in payments:
         # demonstrating polymorphism - we can call the same method on different types of payment objects
         payment.process_payment()
+        # and the same method does different things!
