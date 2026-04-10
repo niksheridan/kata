@@ -1,4 +1,6 @@
-from getter_setter import Circle
+import pytest
+
+from kata.getter_setter import Circle
 
 
 def test_getter_setter():
@@ -8,7 +10,5 @@ def test_getter_setter():
     obj.radius = 20
     assert obj.radius == 20
 
-    try:
+    with pytest.raises(ValueError, match="Radius cannot be negative!"):
         obj.radius = -5
-    except ValueError as exc:
-        assert str(exc) == "Radius cannot be negative!"

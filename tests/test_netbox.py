@@ -1,7 +1,6 @@
-from asyncio.log import logger
-
 import pytest
-from netbox.ip_address import IPv4Address
+
+from kata.netbox import IPv4Address
 
 
 def test_ip_address(valid_ipv4_case):
@@ -24,8 +23,6 @@ def test_ip_address_rejection(invalid_ipv4_value):
 
 def test_explore_ip_address(valid_ipv4_case):
     value, _ = valid_ipv4_case
-    logger.debug(f"Exploring IP address: {value}")
     ip = IPv4Address(value)
-    logger.debug(f"IP address: {ip.address}")
-    logger.debug(f"Is private: {ip.is_private}")
-    logger.debug(f"Is global: {ip.is_global}")
+    assert str(ip) == value
+    assert repr(ip) == f"IPv4Address({value})"
