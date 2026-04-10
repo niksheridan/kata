@@ -1,13 +1,8 @@
 import ipaddress
 
 
-class IpV4Address:
-    def __init__(self, address: str | ipaddress.IPv4Address):
-        """
-        by referencing the setter, we can ensure that the
-        validation logic is applied when initializing the
-        object
-        """
+class IPv4Address:
+    def __init__(self, address: str | ipaddress.IPv4Address) -> None:
         self.address = address
 
     @property
@@ -15,15 +10,14 @@ class IpV4Address:
         return self._address
 
     @address.setter
-    def address(self, value: str | ipaddress.IPv4Address):
-        # if it is a string, try to convert it to an IPv4Address
+    def address(self, value: str | ipaddress.IPv4Address) -> None:
         if isinstance(value, str):
             try:
                 value = ipaddress.IPv4Address(value)
             except ipaddress.AddressValueError as exc:
-                raise ValueError("Address must be a valid IPv4 address!") from exc
+                raise ValueError("address must be a valid IPv4 address") from exc
         if not isinstance(value, ipaddress.IPv4Address):
-            raise ValueError("Address must be an IPv4 address!")
+            raise TypeError("address must be str or ipaddress.IPv4Address")
         self._address = value
 
     @property
@@ -31,9 +25,14 @@ class IpV4Address:
         return self.address.is_private
 
     @property
-    def mask(self) -> int:
-        return self.address.max_prefixlen
-
-    @property
     def is_global(self) -> bool:
         return self.address.is_global
+
+    def __str__(self) -> str:
+        return str(self.address)
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}({self.address!s})"
+
+
+IpV4Address = IPv4Address
